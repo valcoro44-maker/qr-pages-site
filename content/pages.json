@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "index",
+    "title": "QR Landing Page",
+    "heading": "Welcome",
+    "body": [
+      "This is a starter page built with Python and published as static HTML on GitHub Pages.",
+      "You can put this URL into a QR code so people can scan and open it on their phones."
+    ]
+  },
+  {
+    "slug": "welcome",
+    "title": "Welcome Page",
+    "heading": "Welcome to Our Page",
+    "body": [
+      "This page is designed to be simple, fast, and easy to read after scanning a QR code.",
+      "Later, you can add a YouTube video embed without changing the overall structure."
+    ]
+  }
+]
