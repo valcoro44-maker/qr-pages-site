@@ -38,5 +38,32 @@
       "6. Reassurance",
       "Some discomfort is normal. We are here for you. Please call us if you have any concerns."
     ]
+  },
+  {
+    "slug": "examen-completo",
+    "title": "Examen Completo",
+    "heading": "Examen Completo",
+    "body": [
+      "Guion para Video de Examen Completo",
+      "1. Introduccion (10 seg)",
+      "Hoy le explicaremos que puede esperar durante un examen dental completo.",
+      "2. Por que es necesario (15 seg)",
+      "Un examen completo nos ayuda a evaluar su salud bucal en general, detectar problemas a tiempo y crear un plan de tratamiento personalizado.",
+      "3. Que esperar durante el examen (30-45 seg)",
+      "Comenzaremos revisando su historial medico y cualquier pregunta que tenga.",
+      "Luego, tomaremos sus signos vitales, como la presion arterial.",
+      "Despues, tomaremos radiografias: una serie completa con usted sentado y una panoramica con usted de pie.",
+      "Examinaremos su cabeza y cuello, incluyendo su mandibula y ganglios linfaticos, realizando un examen intraoral y extraoral.",
+      "Tambien revisaremos todos los tejidos dentro de su boca: sus encias, lengua y mejillas.",
+      "Evaluaremos sus dientes para detectar caries, desgaste o dano, y revisaremos la salud de sus encias.",
+      "Luego, crearemos un plan de tratamiento que describa todo el trabajo que necesita.",
+      "4. Despues del examen",
+      "Revisaremos todos los resultados del examen con usted.",
+      "Explicaremos cualquier area de preocupacion.",
+      "Discutiremos las opciones de tratamiento, si es necesario.",
+      "Responderemos cualquier pregunta que tenga.",
+      "5. Cuando dar seguimiento",
+      "Por favor, programe y acuda a su proxima cita de seguimiento."
+    ]
   }
 ]
