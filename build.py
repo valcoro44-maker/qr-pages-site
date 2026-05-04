@@ -4,6 +4,7 @@ import json
 import shutil
 from html import escape
 from pathlib import Path
+from urllib.parse import parse_qs, urlparse
 
 
 ROOT = Path(__file__).parent
@@ -12,6 +13,26 @@ OUTPUT_DIR = ROOT / "docs"
 ASSETS_DIR = ROOT / "assets"
 OUTPUT_ASSETS_DIR = OUTPUT_DIR / "assets"
 BANNER_FILENAME = "roseman-mountain-logo.png"
+
+
+def extract_youtube_video_id(page: dict[str, object]) -> str:
+    youtube_url = str(page.get("youtube_url", "") or "").strip()
+    if youtube_url:
+        parsed = urlparse(youtube_url)
+        if parsed.netloc in {"youtu.be", "www.youtu.be"}:
+            return parsed.path.lstrip("/")
+
+        if "youtube.com" in parsed.netloc:
+            if parsed.path == "/watch":
+                return parse_qs(parsed.query).get("v", [""])[0]
+
+            if parsed.path.startswith("/embed/"):
+                return parsed.path.split("/embed/", 1)[1]
+
+            if parsed.path.startswith("/shorts/"):
+                return parsed.path.split("/shorts/", 1)[1]
+
+    return str(page.get("youtube_video_id", "") or "").strip()
 
 
 def build_navigation(pages: list[dict[str, object]]) -> str:
@@ -42,7 +63,7 @@ def render_page(page: dict[str, object], navigation_html: str) -> str:
     title = escape(str(page["title"]))
     heading = escape(str(page["heading"]))
     paragraphs = page.get("body", [])
-    youtube_video_id = str(page.get("youtube_video_id", "") or "").strip()
+    youtube_video_id = extract_youtube_video_id(page)
 
     body_html = "\n".join(
         f"        <p>{escape(str(paragraph))}</p>" for paragraph in paragraphs
@@ -189,10 +210,10 @@ def render_page(page: dict[str, object], navigation_html: str) -> str:
     <main class="shell">
       <article class="card">
 {banner_html}
-        <h1>{heading}</h1>
+        <h1>{heading}</h1>{video_html}
 {body_html}
 {navigation_html}
-        <a class="home-link" href="./index.html">Back to home</a>{video_html}
+        <a class="home-link" href="./index.html">Back to home</a>
       </article>
     </main>
   </body>
