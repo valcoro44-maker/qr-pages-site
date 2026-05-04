@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import re
 import shutil
 from html import escape
 from pathlib import Path
@@ -14,7 +13,6 @@ OUTPUT_DIR = ROOT / "docs"
 ASSETS_DIR = ROOT / "assets"
 OUTPUT_ASSETS_DIR = OUTPUT_DIR / "assets"
 BANNER_FILENAME = "roseman-mountain-logo.png"
-NUMBERED_HEADING_PATTERN = re.compile(r"^\d+\.\s")
 
 
 def extract_youtube_video_id(page: dict[str, object]) -> str:
@@ -35,26 +33,6 @@ def extract_youtube_video_id(page: dict[str, object]) -> str:
                 return parsed.path.split("/shorts/", 1)[1]
 
     return str(page.get("youtube_video_id", "") or "").strip()
-
-
-def render_body_html(page: dict[str, object]) -> str:
-    paragraphs = page.get("body", [])
-    section_style = str(page.get("section_style", "") or "").strip()
-    html_lines: list[str] = []
-
-    for paragraph in paragraphs:
-        text = escape(str(paragraph))
-        css_class = ""
-
-        if section_style == "numbered":
-            if NUMBERED_HEADING_PATTERN.match(str(paragraph)):
-                css_class = ' class="section-heading"'
-            else:
-                css_class = ' class="section-detail"'
-
-        html_lines.append(f"        <p{css_class}>{text}</p>")
-
-    return "\n".join(html_lines)
 
 
 def build_navigation(pages: list[dict[str, object]]) -> str:
@@ -84,8 +62,12 @@ def build_navigation(pages: list[dict[str, object]]) -> str:
 def render_page(page: dict[str, object], navigation_html: str) -> str:
     title = escape(str(page["title"]))
     heading = escape(str(page["heading"]))
+    paragraphs = page.get("body", [])
     youtube_video_id = extract_youtube_video_id(page)
-    body_html = render_body_html(page)
+
+    body_html = "\n".join(
+        f"        <p>{escape(str(paragraph))}</p>" for paragraph in paragraphs
+    )
     banner_html = f"""
         <img
           class="banner"
@@ -118,15 +100,12 @@ def render_page(page: dict[str, object], navigation_html: str) -> str:
     <title>{title}</title>
     <style>
       :root {{
-        --page-bg: #f3f0ea;
-        --page-bg-alt: #fbfaf7;
-        --card-bg: rgba(255, 255, 255, 0.9);
-        --text: #251d1a;
-        --muted: #5f5550;
-        --accent: #8b0045;
-        --accent-soft: #f4d9e8;
-        --border: rgba(139, 0, 69, 0.12);
-        --shadow: 0 24px 60px rgba(61, 37, 45, 0.12);
+        --page-bg: #f5f1e8;
+        --card-bg: #fffdf8;
+        --text: #1f1b16;
+        --muted: #5c5147;
+        --accent: #a33b20;
+        --border: #dccfbe;
       }}
 
       * {{
@@ -135,11 +114,10 @@ def render_page(page: dict[str, object], navigation_html: str) -> str:
 
       body {{
         margin: 0;
-        font-family: "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+        font-family: Georgia, "Times New Roman", serif;
         background:
-          radial-gradient(circle at top left, rgba(139, 0, 69, 0.09), transparent 28%),
-          radial-gradient(circle at bottom right, rgba(183, 144, 87, 0.12), transparent 24%),
-          linear-gradient(180deg, var(--page-bg-alt) 0%, var(--page-bg) 100%);
+          radial-gradient(circle at top right, rgba(163, 59, 32, 0.08), transparent 30%),
+          linear-gradient(180deg, #f8f4ec 0%, var(--page-bg) 100%);
         color: var(--text);
       }}
 
@@ -147,70 +125,49 @@ def render_page(page: dict[str, object], navigation_html: str) -> str:
         min-height: 100vh;
         display: grid;
         place-items: center;
-        padding: 28px 18px;
+        padding: 24px;
       }}
 
       .card {{
-        width: min(780px, 100%);
+        width: min(720px, 100%);
         background: var(--card-bg);
         border: 1px solid var(--border);
-        border-radius: 28px;
-        padding: 36px 28px 32px;
-        box-shadow: var(--shadow);
-        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 32px 24px;
+        box-shadow: 0 16px 40px rgba(31, 27, 22, 0.08);
       }}
 
       .banner {{
         display: block;
         width: min(100%, 260px);
-        margin: 0 auto 20px;
+        margin: 0 auto 24px;
         height: auto;
       }}
 
       h1 {{
         margin-top: 0;
-        margin-bottom: 18px;
-        font-size: clamp(2rem, 6vw, 3.1rem);
-        line-height: 1.02;
-        letter-spacing: -0.03em;
-        text-wrap: balance;
+        margin-bottom: 16px;
+        font-size: clamp(2rem, 6vw, 3rem);
+        line-height: 1.05;
       }}
 
       p {{
-        margin: 0 0 14px;
-        font-size: 1.06rem;
-        line-height: 1.8;
+        font-size: 1.1rem;
+        line-height: 1.7;
         color: var(--muted);
-        text-wrap: pretty;
-      }}
-
-      .section-heading {{
-        font-weight: 700;
-        color: var(--text);
-      }}
-
-      .section-detail {{
-        padding-left: 20px;
       }}
 
       .home-link {{
         display: inline-block;
-        margin-top: 16px;
+        margin-top: 12px;
         color: var(--accent);
         text-decoration: none;
-        font-weight: 700;
-        padding: 10px 14px;
-        border-radius: 999px;
-        background: var(--accent-soft);
-      }}
-
-      .home-link:hover {{
-        text-decoration: none;
+        font-weight: bold;
       }}
 
       .nav-block {{
         margin-top: 28px;
-        padding-top: 22px;
+        padding-top: 20px;
         border-top: 1px solid var(--border);
       }}
 
@@ -221,19 +178,14 @@ def render_page(page: dict[str, object], navigation_html: str) -> str:
 
       .page-list a {{
         color: var(--accent);
-        font-weight: 600;
       }}
 
       .video-block {{
-        margin: 12px 0 28px;
+        margin-top: 32px;
       }}
 
       .video-block h2 {{
-        margin: 0 0 12px;
-        font-size: 0.95rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--accent);
+        margin-bottom: 12px;
       }}
 
       .video-frame {{
@@ -241,9 +193,8 @@ def render_page(page: dict[str, object], navigation_html: str) -> str:
         width: 100%;
         padding-top: 56.25%;
         overflow: hidden;
-        border-radius: 22px;
+        border-radius: 16px;
         background: #000;
-        box-shadow: 0 18px 36px rgba(0, 0, 0, 0.16);
       }}
 
       .video-frame iframe {{
@@ -252,17 +203,6 @@ def render_page(page: dict[str, object], navigation_html: str) -> str:
         width: 100%;
         height: 100%;
         border: 0;
-      }}
-
-      @media (max-width: 640px) {{
-        .card {{
-          padding: 28px 18px 24px;
-          border-radius: 22px;
-        }}
-
-        p {{
-          font-size: 1rem;
-        }}
       }}
     </style>
   </head>

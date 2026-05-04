@@ -6,12 +6,15 @@
     <title>POE Prophy</title>
     <style>
       :root {
-        --page-bg: #f5f1e8;
-        --card-bg: #fffdf8;
-        --text: #1f1b16;
-        --muted: #5c5147;
-        --accent: #a33b20;
-        --border: #dccfbe;
+        --page-bg: #f3f0ea;
+        --page-bg-alt: #fbfaf7;
+        --card-bg: rgba(255, 255, 255, 0.9);
+        --text: #251d1a;
+        --muted: #5f5550;
+        --accent: #8b0045;
+        --accent-soft: #f4d9e8;
+        --border: rgba(139, 0, 69, 0.12);
+        --shadow: 0 24px 60px rgba(61, 37, 45, 0.12);
       }
 
       * {
@@ -20,10 +23,11 @@
 
       body {
         margin: 0;
-        font-family: Georgia, "Times New Roman", serif;
+        font-family: "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
         background:
-          radial-gradient(circle at top right, rgba(163, 59, 32, 0.08), transparent 30%),
-          linear-gradient(180deg, #f8f4ec 0%, var(--page-bg) 100%);
+          radial-gradient(circle at top left, rgba(139, 0, 69, 0.09), transparent 28%),
+          radial-gradient(circle at bottom right, rgba(183, 144, 87, 0.12), transparent 24%),
+          linear-gradient(180deg, var(--page-bg-alt) 0%, var(--page-bg) 100%);
         color: var(--text);
       }
 
@@ -31,49 +35,70 @@
         min-height: 100vh;
         display: grid;
         place-items: center;
-        padding: 24px;
+        padding: 28px 18px;
       }
 
       .card {
-        width: min(720px, 100%);
+        width: min(780px, 100%);
         background: var(--card-bg);
         border: 1px solid var(--border);
-        border-radius: 20px;
-        padding: 32px 24px;
-        box-shadow: 0 16px 40px rgba(31, 27, 22, 0.08);
+        border-radius: 28px;
+        padding: 36px 28px 32px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(10px);
       }
 
       .banner {
         display: block;
         width: min(100%, 260px);
-        margin: 0 auto 24px;
+        margin: 0 auto 20px;
         height: auto;
       }
 
       h1 {
         margin-top: 0;
-        margin-bottom: 16px;
-        font-size: clamp(2rem, 6vw, 3rem);
-        line-height: 1.05;
+        margin-bottom: 18px;
+        font-size: clamp(2rem, 6vw, 3.1rem);
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+        text-wrap: balance;
       }
 
       p {
-        font-size: 1.1rem;
-        line-height: 1.7;
+        margin: 0 0 14px;
+        font-size: 1.06rem;
+        line-height: 1.8;
         color: var(--muted);
+        text-wrap: pretty;
+      }
+
+      .section-heading {
+        font-weight: 700;
+        color: var(--text);
+      }
+
+      .section-detail {
+        padding-left: 20px;
       }
 
       .home-link {
         display: inline-block;
-        margin-top: 12px;
+        margin-top: 16px;
         color: var(--accent);
         text-decoration: none;
-        font-weight: bold;
+        font-weight: 700;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+      }
+
+      .home-link:hover {
+        text-decoration: none;
       }
 
       .nav-block {
         margin-top: 28px;
-        padding-top: 20px;
+        padding-top: 22px;
         border-top: 1px solid var(--border);
       }
 
@@ -84,14 +109,19 @@
 
       .page-list a {
         color: var(--accent);
+        font-weight: 600;
       }
 
       .video-block {
-        margin-top: 32px;
+        margin: 12px 0 28px;
       }
 
       .video-block h2 {
-        margin-bottom: 12px;
+        margin: 0 0 12px;
+        font-size: 0.95rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
       }
 
       .video-frame {
@@ -99,8 +129,9 @@
         width: 100%;
         padding-top: 56.25%;
         overflow: hidden;
-        border-radius: 16px;
+        border-radius: 22px;
         background: #000;
+        box-shadow: 0 18px 36px rgba(0, 0, 0, 0.16);
       }
 
       .video-frame iframe {
@@ -109,6 +140,17 @@
         width: 100%;
         height: 100%;
         border: 0;
+      }
+
+      @media (max-width: 640px) {
+        .card {
+          padding: 28px 18px 24px;
+          border-radius: 22px;
+        }
+
+        p {
+          font-size: 1rem;
+        }
       }
     </style>
   </head>
@@ -134,29 +176,29 @@
           ></iframe>
         </div>
       </section>
-        <p>Guion para Video de Profilaxis Dental (Limpieza Dental) y POE (revision dental periodica)</p>
-        <p>1. Introduccion (10 seg)</p>
-        <p>Hoy le explicaremos que puede esperar durante una profilaxis dental, tambien conocida como limpieza dental.</p>
-        <p>2. Por que es necesaria (15 seg)</p>
-        <p>La profilaxis dental ayuda a eliminar la placa y el sarro, prevenir enfermedades de las encias y mantener su boca limpia y saludable.</p>
-        <p>3. Que esperar durante la cita (30-45 seg)</p>
-        <p>Comenzaremos revisando su historial medico y cualquier inquietud que tenga.</p>
-        <p>Despues, tomaremos radiografias: una serie de cuatro radiografias.</p>
-        <p>Evaluaremos sus dientes para detectar caries, desgaste o dano, y revisaremos la salud de sus encias.</p>
-        <p>Luego, crearemos un plan de tratamiento que describa todo el trabajo que necesita.</p>
-        <p>Usaremos instrumentos especiales para eliminar la placa y el sarro de sus dientes.</p>
-        <p>Despues, puliremos sus dientes para eliminar manchas superficiales y dejarlos mas suaves.</p>
-        <p>Tambien usaremos hilo dental para limpiar entre sus dientes.</p>
-        <p>En algunos casos, aplicaremos fluor para ayudar a fortalecer el esmalte y prevenir caries. Esto es mas comun para ninos.</p>
-        <p>4. Despues de la limpieza</p>
-        <p>Revisaremos los resultados con usted.</p>
-        <p>Le informaremos sobre cualquier area de preocupacion.</p>
-        <p>Le daremos recomendaciones para el cuidado en casa.</p>
-        <p>Responderemos cualquier pregunta que tenga.</p>
-        <p>5. Cuando dar seguimiento</p>
-        <p>Por favor, programe su proxima limpieza segun nuestras recomendaciones, generalmente cada seis meses. Dependiendo del pronostico, usted va a tener que regresar mas seguido.</p>
-        <p>6. Tranquilidad</p>
-        <p>La profilaxis dental es una parte importante para mantener su sonrisa saludable. Estamos aqui para ayudarle en cada paso. Por favor, avisenos si tiene alguna pregunta.</p>
+        <p class="section-detail">Guion para Video de Profilaxis Dental (Limpieza Dental) y POE (revision dental periodica)</p>
+        <p class="section-heading">1. Introduccion (10 seg)</p>
+        <p class="section-detail">Hoy le explicaremos que puede esperar durante una profilaxis dental, tambien conocida como limpieza dental.</p>
+        <p class="section-heading">2. Por que es necesaria (15 seg)</p>
+        <p class="section-detail">La profilaxis dental ayuda a eliminar la placa y el sarro, prevenir enfermedades de las encias y mantener su boca limpia y saludable.</p>
+        <p class="section-heading">3. Que esperar durante la cita (30-45 seg)</p>
+        <p class="section-detail">Comenzaremos revisando su historial medico y cualquier inquietud que tenga.</p>
+        <p class="section-detail">Despues, tomaremos radiografias: una serie de cuatro radiografias.</p>
+        <p class="section-detail">Evaluaremos sus dientes para detectar caries, desgaste o dano, y revisaremos la salud de sus encias.</p>
+        <p class="section-detail">Luego, crearemos un plan de tratamiento que describa todo el trabajo que necesita.</p>
+        <p class="section-detail">Usaremos instrumentos especiales para eliminar la placa y el sarro de sus dientes.</p>
+        <p class="section-detail">Despues, puliremos sus dientes para eliminar manchas superficiales y dejarlos mas suaves.</p>
+        <p class="section-detail">Tambien usaremos hilo dental para limpiar entre sus dientes.</p>
+        <p class="section-detail">En algunos casos, aplicaremos fluor para ayudar a fortalecer el esmalte y prevenir caries. Esto es mas comun para ninos.</p>
+        <p class="section-heading">4. Despues de la limpieza</p>
+        <p class="section-detail">Revisaremos los resultados con usted.</p>
+        <p class="section-detail">Le informaremos sobre cualquier area de preocupacion.</p>
+        <p class="section-detail">Le daremos recomendaciones para el cuidado en casa.</p>
+        <p class="section-detail">Responderemos cualquier pregunta que tenga.</p>
+        <p class="section-heading">5. Cuando dar seguimiento</p>
+        <p class="section-detail">Por favor, programe su proxima limpieza segun nuestras recomendaciones, generalmente cada seis meses. Dependiendo del pronostico, usted va a tener que regresar mas seguido.</p>
+        <p class="section-heading">6. Tranquilidad</p>
+        <p class="section-detail">La profilaxis dental es una parte importante para mantener su sonrisa saludable. Estamos aqui para ayudarle en cada paso. Por favor, avisenos si tiene alguna pregunta.</p>
 
         <a class="home-link" href="./index.html">Back to home</a>
       </article>

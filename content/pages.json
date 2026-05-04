@@ -43,6 +43,7 @@
     "slug": "examen-completo",
     "title": "Examen Completo",
     "heading": "Examen Completo",
+    "section_style": "numbered",
     "youtube_url": "https://www.youtube.com/watch?v=GnWmX6LshQw",
     "body": [
       "Guion para Video de Examen Completo",
@@ -71,6 +72,7 @@
     "slug": "poe-prophy",
     "title": "POE Prophy",
     "heading": "POE Prophy",
+    "section_style": "numbered",
     "youtube_url": "https://www.youtube.com/watch?v=GnWmX6LshQw",
     "body": [
       "Guion para Video de Profilaxis Dental (Limpieza Dental) y POE (revision dental periodica)",
@@ -102,6 +104,7 @@
     "slug": "srp",
     "title": "SRP",
     "heading": "SRP",
+    "section_style": "numbered",
     "youtube_url": "https://www.youtube.com/watch?v=GnWmX6LshQw",
     "body": [
       "Guion para Video de Limpieza Profunda (SRP)",

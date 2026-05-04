@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Examen Completo</title>
+    <style>
+      :root {
+        --page-bg: #f5f1e8;
+        --card-bg: #fffdf8;
+        --text: #1f1b16;
+        --muted: #5c5147;
+        --accent: #a33b20;
+        --border: #dccfbe;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        background:
+          radial-gradient(circle at top right, rgba(163, 59, 32, 0.08), transparent 30%),
+          linear-gradient(180deg, #f8f4ec 0%, var(--page-bg) 100%);
+        color: var(--text);
+      }
+
+      .shell {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+
+      .card {
+        width: min(720px, 100%);
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 32px 24px;
+        box-shadow: 0 16px 40px rgba(31, 27, 22, 0.08);
+      }
+
+      .banner {
+        display: block;
+        width: min(100%, 260px);
+        margin: 0 auto 24px;
+        height: auto;
+      }
+
+      h1 {
+        margin-top: 0;
+        margin-bottom: 16px;
+        font-size: clamp(2rem, 6vw, 3rem);
+        line-height: 1.05;
+      }
+
+      p {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        color: var(--muted);
+      }
+
+      .home-link {
+        display: inline-block;
+        margin-top: 12px;
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .nav-block {
+        margin-top: 28px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border);
+      }
+
+      .page-list {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .page-list a {
+        color: var(--accent);
+      }
+
+      .video-block {
+        margin-top: 32px;
+      }
+
+      .video-block h2 {
+        margin-bottom: 12px;
+      }
+
+      .video-frame {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+        overflow: hidden;
+        border-radius: 16px;
+        background: #000;
+      }
+
+      .video-frame iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <article class="card">
+
+        <img
+          class="banner"
+          src="./assets/roseman-mountain-logo.png"
+          alt="Roseman University of Health Sciences"
+        >
+        <h1>Examen Completo</h1>
+      <section class="video-block" aria-labelledby="video-title">
+        <h2 id="video-title">Video</h2>
+        <div class="video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/GnWmX6LshQw"
+            title="Embedded YouTube video"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </section>
+        <p>Guion para Video de Examen Completo</p>
+        <p>1. Introduccion (10 seg)</p>
+        <p>Hoy le explicaremos que puede esperar durante un examen dental completo.</p>
+        <p>2. Por que es necesario (15 seg)</p>
+        <p>Un examen completo nos ayuda a evaluar su salud bucal en general, detectar problemas a tiempo y crear un plan de tratamiento personalizado.</p>
+        <p>3. Que esperar durante el examen (30-45 seg)</p>
+        <p>Comenzaremos revisando su historial medico y cualquier pregunta que tenga.</p>
+        <p>Luego, tomaremos sus signos vitales, como la presion arterial.</p>
+        <p>Despues, tomaremos radiografias: una serie completa con usted sentado y una panoramica con usted de pie.</p>
+        <p>Examinaremos su cabeza y cuello, incluyendo su mandibula y ganglios linfaticos, realizando un examen intraoral y extraoral.</p>
+        <p>Tambien revisaremos todos los tejidos dentro de su boca: sus encias, lengua y mejillas.</p>
+        <p>Evaluaremos sus dientes para detectar caries, desgaste o dano, y revisaremos la salud de sus encias.</p>
+        <p>Luego, crearemos un plan de tratamiento que describa todo el trabajo que necesita.</p>
+        <p>4. Despues del examen</p>
+        <p>Revisaremos todos los resultados del examen con usted.</p>
+        <p>Explicaremos cualquier area de preocupacion.</p>
+        <p>Discutiremos las opciones de tratamiento, si es necesario.</p>
+        <p>Responderemos cualquier pregunta que tenga.</p>
+        <p>5. Cuando dar seguimiento</p>
+        <p>Por favor, programe y acuda a su proxima cita de seguimiento.</p>
+
+        <a class="home-link" href="./index.html">Back to home</a>
+      </article>
+    </main>
+  </body>
+</html>
