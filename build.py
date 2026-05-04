@@ -118,7 +118,7 @@ def render_page(page: dict[str, object], navigation_html: str) -> str:
 
       .banner {{
         display: block;
-        width: min(100%, 520px);
+        width: min(100%, 260px);
         margin: 0 auto 24px;
         height: auto;
       }}
