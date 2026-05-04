@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 from html import escape
 from pathlib import Path
 
@@ -8,6 +9,9 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 CONTENT_FILE = ROOT / "content" / "pages.json"
 OUTPUT_DIR = ROOT / "docs"
+ASSETS_DIR = ROOT / "assets"
+OUTPUT_ASSETS_DIR = OUTPUT_DIR / "assets"
+BANNER_FILENAME = "roseman-mountain-logo.png"
 
 
 def build_navigation(pages: list[dict[str, object]]) -> str:
@@ -43,6 +47,12 @@ def render_page(page: dict[str, object], navigation_html: str) -> str:
     body_html = "\n".join(
         f"        <p>{escape(str(paragraph))}</p>" for paragraph in paragraphs
     )
+    banner_html = f"""
+        <img
+          class="banner"
+          src="./assets/{escape(BANNER_FILENAME)}"
+          alt="Roseman University of Health Sciences"
+        >"""
 
     video_html = ""
     if youtube_video_id:
@@ -104,6 +114,13 @@ def render_page(page: dict[str, object], navigation_html: str) -> str:
         border-radius: 20px;
         padding: 32px 24px;
         box-shadow: 0 16px 40px rgba(31, 27, 22, 0.08);
+      }}
+
+      .banner {{
+        display: block;
+        width: min(100%, 520px);
+        margin: 0 auto 24px;
+        height: auto;
       }}
 
       h1 {{
@@ -171,6 +188,7 @@ def render_page(page: dict[str, object], navigation_html: str) -> str:
   <body>
     <main class="shell">
       <article class="card">
+{banner_html}
         <h1>{heading}</h1>
 {body_html}
 {navigation_html}
@@ -190,6 +208,12 @@ def output_path_for_slug(slug: str) -> Path:
 def main() -> None:
     pages = json.loads(CONTENT_FILE.read_text(encoding="utf-8"))
     OUTPUT_DIR.mkdir(exist_ok=True)
+    OUTPUT_ASSETS_DIR.mkdir(exist_ok=True)
+    banner_source = ASSETS_DIR / BANNER_FILENAME
+    if not banner_source.exists():
+        raise FileNotFoundError(f"Missing banner image: {banner_source}")
+
+    shutil.copy2(banner_source, OUTPUT_ASSETS_DIR / BANNER_FILENAME)
     navigation_html = build_navigation(pages)
 
     for page in pages:
